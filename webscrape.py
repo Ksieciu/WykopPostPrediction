@@ -24,7 +24,6 @@ class Crawler:
 
 # https://www.wykop.pl/mikroblog/hot/ostatnie/24/strona/
 # getting content from pages
-    @staticmethod
     def crawl_hot(urls):
         for url in urls:
             result = requests.get(url)
@@ -71,7 +70,6 @@ class Crawler:
                     file.write(rawText)
 
     # func for getting pages urls(ex. urls from pages 1-7) and returning list of urls
-    @staticmethod
     def get_urls(page_url, starting_page, ending_page):
         urls = []
         for i in range(starting_page, ending_page+1):
