@@ -5,9 +5,9 @@ import numpy as np
 from sklearn import tree
 from sklearn.metrics import precision_score, recall_score, accuracy_score, f1_score
 from sklearn import preprocessing
+from textToArr import text_to_arr
 
 
-post_text = np.array([])
 num_of_words = []
 hashtags = np.array([])
 num_of_hashtags = []
@@ -22,17 +22,27 @@ post_words_label = []
 
 # https://www.wykop.pl/mikroblog/hot/ostatnie/24/strona/
 # getting content from pages
-def crawl_hot(urls, post_text, post_words_prob):
+def crawl_hot(urls, post_words_prob, file_name):
     for url in urls:
         result = requests.get(url)
         # print(result.status_code)
         content = result.content
         soup = BeautifulSoup(content, 'lxml')
+        label = 1
+        page = ''
+        for x in url[-2:]:
+            for y in x:
+                if y.isdigit():
+                    page = page + y
 
-
+        if int(page) >= 10:
+            label = 0
+        else:
+            label = 1
 
         # saving data to file using with - we can remove it later, just testing purpose
-        with open("testData.txt", "a+", encoding='utf-8') as file:
+        # klasa do otwierania i pracowania na otwartym tekście
+        with open(file_name, "a+", encoding='utf-8') as file:
             # looking for div class "wblock lcontrast dC" content - takes post and comments
             for n in soup.find_all(class_='wblock lcontrast dC'):
                 act_post = []
@@ -64,21 +74,28 @@ def crawl_hot(urls, post_text, post_words_prob):
 
                 text = n.get_text()
                 # text = str(n)
-
+                rawText = ''
                 rawText = ''.join([x for x in text if x.isalpha() or x.isspace()])
                 words = rawText.lower().split()
+                post_len = 0
                 for word in words:
                     if len(word) > 2:
-                        post_text = np.append(post_text, words)
                         act_post.append(word)
-                        file.write(rawText)
-
-                le = preprocessing.LabelEncoder()
-                le.fit(act_post)
-                print(act_post)
-                print(le.transform(act_post))
 
                 post_len = len(act_post)
+
+                for word in act_post:
+                    file.write(word + '\n')
+                    file.write(str(label) + '\n')
+                    file.write(str(post_len) + '\n')
+
+
+                # le = preprocessing.LabelEncoder()
+                # le.fit(act_post)
+                # print(act_post)
+                # print(le.transform(act_post))
+
+
                 for elem in act_post:
                     post_words_prob.append([elem, post_len])
                     post_words_label.append(1)
@@ -94,9 +111,14 @@ def get_urls(page_url, starting_page, ending_page):
     return urls
 
 
-urls = get_urls('https://www.wykop.pl/mikroblog/hot/ostatnie/24/strona/', 1, 1)
-crawl_hot(urls, post_text, post_words_prob)
+urls = get_urls('https://www.wykop.pl/mikroblog/hot/ostatnie/24/strona/', 1, 20)
+crawl_hot(urls, post_words_prob, "testData.txt")
 
-clf = tree.DecisionTreeClassifier()
-
+# words, labels, post_len = text_to_arr('testData.txt')
+# le = preprocessing.LabelEncoder()
+# le.fit(words)
+# print(words)
+# transformed_words = le.transform(words)
+# print(transformed_words)
+# clf = tree.DecisionTreeClassifier()
 # clf.fit(post_words_prob, post_words_label)
