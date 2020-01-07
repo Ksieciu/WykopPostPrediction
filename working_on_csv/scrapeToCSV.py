@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
+from stringFunctions import get_urls, lemmatize_words, list_to_string
 import requests
 import csv
-import morfeusz2
 
 
 # https://www.wykop.pl/mikroblog/hot/ostatnie/24/strona/
@@ -67,37 +67,27 @@ def crawl_hot(urls, file_name):
 
                 text = n.get_text()
 
+                # saving to raw_text prepared taxt with only words and spaces
                 raw_text = ''
                 raw_text = ''.join([x for x in text if x.isalpha() or x.isspace()])
 
+                # making all letters lowercases and adding them to words list
                 words = raw_text.lower().split()
                 words_len = 0
 
+                # saving to act_post only words that are at least 3 chars long
                 for word in words:
                     if len(word) > 2:
                         act_post.append(word)
 
+                lemmatized = lemmatize_words(act_post)
+                print(lemmatized)
                 words_len = len(act_post)
                 words_str = list_to_string(act_post)
 
+                # saving to csv text, words and number of words that are at least 3 chars long
+                # hashtags and number of hashtags and label(0/1)
                 writer.writerow([raw_text, words_str, words_len, hashtags_str, hashtags_len, label])
-
-
-# func for getting pages urls(ex. urls from pages 1-7) and returning list of urls
-def get_urls(page_url, starting_page, ending_page):
-    urls = []
-    for i in range(starting_page, ending_page + 1):
-        url = page_url + str(i)
-        urls.append(url)
-    return urls
-
-
-def list_to_string(lst):
-    toString = ' '.join([str(elem) for elem in lst])
-    return toString
-
-
-
 
 
 urls = get_urls('https://www.wykop.pl/mikroblog/hot/ostatnie/24/strona/', 1, 20)
