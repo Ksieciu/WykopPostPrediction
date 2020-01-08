@@ -76,6 +76,7 @@ def crawl_hot(urls, post_words_prob, file_name):
                 # text = str(n)
                 rawText = ''
                 rawText = ''.join([x for x in text if x.isalpha() or x.isspace()])
+
                 words = rawText.lower().split()
                 post_len = 0
                 for word in words:
@@ -113,12 +114,3 @@ def get_urls(page_url, starting_page, ending_page):
 
 urls = get_urls('https://www.wykop.pl/mikroblog/hot/ostatnie/24/strona/', 1, 20)
 crawl_hot(urls, post_words_prob, "testData.txt")
-
-# words, labels, post_len = text_to_arr('testData.txt')
-# le = preprocessing.LabelEncoder()
-# le.fit(words)
-# print(words)
-# transformed_words = le.transform(words)
-# print(transformed_words)
-# clf = tree.DecisionTreeClassifier()
-# clf.fit(post_words_prob, post_words_label)
