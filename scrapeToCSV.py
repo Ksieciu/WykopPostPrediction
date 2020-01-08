@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from stringFunctions import get_urls, lemmatize_words, list_to_string
+from os import path
 import requests
 import csv
 
@@ -26,11 +27,18 @@ def crawl_hot(urls, file_name):
 
         # saving data to file using with - we can remove it later, just testing purpose
         # klasa do otwierania i pracowania na otwartym tekście
+        if path.exists("csvData.csv"):
+            exists = True
+        else:
+            exists = False
+
         with open(file_name, "a+", encoding='utf-8', newline='') as file:
             # looking for div class "wblock lcontrast dC" content - takes post and comments
             writer = csv.writer(file)
-            writer.writerow(["post", "words", "words_count", "hashtags",
-                             "hashtags_count", "label"])
+            # creating csv columns names
+            if exists is False:
+                writer.writerow(["post", "words", "words_count", "hashtags",
+                                 "hashtags_count", "label"])
 
             for n in soup.find_all(class_='wblock lcontrast dC'):
                 act_post = []
