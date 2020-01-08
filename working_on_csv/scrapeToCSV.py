@@ -81,9 +81,8 @@ def crawl_hot(urls, file_name):
                         act_post.append(word)
 
                 lemmatized = lemmatize_words(act_post)
-                print(lemmatized)
                 words_len = len(act_post)
-                words_str = list_to_string(act_post)
+                words_str = list_to_string(lemmatized)
 
                 # saving to csv text, words and number of words that are at least 3 chars long
                 # hashtags and number of hashtags and label(0/1)

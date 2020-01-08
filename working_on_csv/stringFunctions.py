@@ -21,7 +21,6 @@ def lemmatize_words(lst):
     lemmatized = []
     for word in lst:
         analysis = morf.analyse(word)
-        for i, j, interp in analysis:
-            token = interp[1].split(':')[0]
-            lemmatized.append(token)
+        token = analysis[0][2][1].split(':')[0]
+        lemmatized.append(token)
     return lemmatized

@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split
 
 
 
+
 train = pd.read_csv("csvData.csv")
 print(train["hashtags"].head())
 # X_train, X_test, y_train, y_test = train_test_split(words, labels, random_state=1)
