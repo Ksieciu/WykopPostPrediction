@@ -26,18 +26,18 @@ train = pd.read_csv("csvData2.csv")
 
 
 # linear classifier on Word Level tfidfs
-word_level_tfidf_linear = mc.ModelPrediction(train["words"], train["hashtags"], train["label"],
+word_level_tfidf_linear = mc.ModelPrediction(train["words"], train["label"],
                                              linear_model.LogisticRegression())
 print("\n\nword_level_tfidf_linear")
 word_level_tfidf_linear.show_all()
 
-ngram_level_tfidf = mc.ModelPrediction(train["words"], train["hashtags"], train["label"],
+ngram_level_tfidf = mc.ModelPrediction(train["words"], train["label"],
                                        linear_model.LogisticRegression(),
                                        ngrams=(2,3))
 print("\nngram_level_tfidf_linear")
 ngram_level_tfidf.show_all()
 
-char_level_tfidf = mc.ModelPrediction(train["words"], train["hashtags"], train["label"],
+char_level_tfidf = mc.ModelPrediction(train["words"], train["label"],
                                       linear_model.LogisticRegression(),
                                       analyze='char', ngrams=(2,3))
 print("\nchar_level_tfidf_linear")
@@ -45,18 +45,18 @@ char_level_tfidf.show_all()
 
 
 # random forest classifier on tfidfs
-word_level_tfidf_forest = mc.ModelPrediction(train["words"], train["hashtags"], train["label"],
+word_level_tfidf_forest = mc.ModelPrediction(train["words"], train["label"],
                                              ensemble.RandomForestClassifier())
 print("\n\nword_level_tfidf_forest")
 word_level_tfidf_forest.show_all()
 
-ngram_level_tfidf_forest = mc.ModelPrediction(train["words"], train["hashtags"], train["label"],
+ngram_level_tfidf_forest = mc.ModelPrediction(train["words"], train["label"],
                                               ensemble.RandomForestClassifier(),
                                               ngrams=(2,3))
 print("\nngram_level_tfidf_forest")
 ngram_level_tfidf_forest.show_all()
 
-char_level_tfidf_forest = mc.ModelPrediction(train["words"], train["hashtags"], train["label"],
+char_level_tfidf_forest = mc.ModelPrediction(train["words"], train["label"],
                                              ensemble.RandomForestClassifier(),
                                              analyze='char', ngrams=(2,3))
 print("\nchar_level_tfidf_forest")
@@ -64,18 +64,18 @@ char_level_tfidf_forest.show_all()
 
 
 # Naive Bayes classifier on tfidfs
-word_level_tfidf_nb = mc.ModelPrediction(train["words"], train["hashtags"], train["label"],
+word_level_tfidf_nb = mc.ModelPrediction(train["words"], train["label"],
                                          naive_bayes.MultinomialNB())
 print("\n\nword_level_tfidf_nb")
 word_level_tfidf_nb.show_all()
 
-ngram_level_tfidf_nb = mc.ModelPrediction(train["words"], train["hashtags"], train["label"],
+ngram_level_tfidf_nb = mc.ModelPrediction(train["words"], train["label"],
                                           naive_bayes.MultinomialNB(),
                                           ngrams=(2,3))
 print("\nngram_level_tfidf_nb")
 ngram_level_tfidf_nb.show_all()
 
-char_level_tfidf_nb = mc.ModelPrediction(train["words"], train["hashtags"], train["label"],
+char_level_tfidf_nb = mc.ModelPrediction(train["words"], train["label"],
                                          naive_bayes.MultinomialNB(),
                                          analyze='char', ngrams=(2,3))
 print("\nchar_level_tfidf_nb")

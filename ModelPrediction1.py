@@ -8,9 +8,8 @@ import itertools
 
 class ModelPrediction():
 
-    def __init__(self, words, hashtags, label, classifier, ngrams=(1, 1), analyze='word'):
+    def __init__(self, words, label, classifier, ngrams=(1, 1), analyze='word'):
         self.words = words
-        self.hashtags = hashtags
         self.label = label
         self.classifier = classifier
         self.ngrams = ngrams
