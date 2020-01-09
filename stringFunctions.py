@@ -7,6 +7,7 @@ def list_to_string(lst):
     return toString
 
 
+# lemmatizer that takes first lemat of the word, adds it to arr and returns that arr
 def lemmatize_words(lst):
     morf = morfeusz2.Morfeusz()
     lemmatized = []
@@ -17,6 +18,7 @@ def lemmatize_words(lst):
     return lemmatized
 
 
+# func for checking if url page is from hot
 def get_label(url):
     page = ''
     for x in url[-2:]:
@@ -28,7 +30,8 @@ def get_label(url):
     else:
         return 1
 
-
+# tę funkcję get_clear_text można przerzucić do klasy Scraper - dobrze by było!!!
+# func for cleaning html code and putting data into proper variables and arrays
 def get_clear_text(n):
     act_post = []
     hashtags = []
@@ -52,7 +55,6 @@ def get_clear_text(n):
     # saving to raw_text prepared taxt with only words and spaces
     raw_text = ''
     raw_text = (''.join([x for x in text if x.isalpha() or x.isspace()])).strip()
-
 
     # making all letters lowercases and adding them to words list
     words = raw_text.lower().split()

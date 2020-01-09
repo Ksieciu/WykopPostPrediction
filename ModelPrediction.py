@@ -12,6 +12,7 @@ class ModelPrediction():
         self.classifier = classifier
 
     def model_testing_tfidf(self):
+        # splitting data into training and test sets
         self.train_x, self.valid_x, self.train_label, self.valid_label = train_test_split(self.data, self.label, random_state=1)
 
         # normalizing labels - not really necessary in our case, but just to be sure
