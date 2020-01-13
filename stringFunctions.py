@@ -84,3 +84,16 @@ def decomposing(n):
         mediaContent.decompose()
 
     return n
+
+
+def df_to_arr(df):
+    features = []
+    labels = []
+    for i in range(len(df)):
+        feature = [df['words_prob'][i], df['words_count'][i],
+                   df['hashtags_prob'][i], df['hashtags_count'][i]]
+        features.append(feature)
+        if 'label' in df.columns:
+            label = df['label'][i]
+            labels.append(label)
+    return features, labels

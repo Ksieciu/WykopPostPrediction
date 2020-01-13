@@ -6,7 +6,7 @@ import itertools
 
 
 
-class ModelPrediction():
+class ModelPredictionTFIDF():
 
     def __init__(self, words, label, classifier, ngrams=(1, 1), analyze='word'):
         self.words = words
@@ -14,6 +14,8 @@ class ModelPrediction():
         self.classifier = classifier
         self.ngrams = ngrams
         self.analyze = analyze
+        self.model_testing_tfidf()
+        self.train_test_model()
 
     # func for splitting data into training and test sets, and fitting into tfidf method
     def model_testing_tfidf(self):
@@ -36,7 +38,7 @@ class ModelPrediction():
         # return xtrain_tfidf, xvalid_tfidf, train_x, valid_x, train_label, valid_label
 
 
-    def train_model(self):
+    def train_test_model(self):
         # fit the training dataset on the classifier
         self.classifier.fit(self.xtrain_tfidf, self.train_label)
         # predict the labels on validation dataset(0/1)
@@ -47,10 +49,13 @@ class ModelPrediction():
 
 
     def show_all(self):
-        self.model_testing_tfidf()
-        self.train_model()
+        # self.model_testing_tfidf()
+        # self.train_model()
         print("Accuracy:", self.accuracy)
         # print(self.predictions_proba)
+
+    # def post_pred(self):
+
 
 
     # def post_prediction(self):

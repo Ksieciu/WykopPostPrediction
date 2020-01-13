@@ -1,6 +1,5 @@
 import pandas as pd
-import ModelPrediction as m
-import ModelPrediction1 as mc
+import ModelPredictionTFIDF as mc
 from sklearn import linear_model, naive_bayes, svm
 from sklearn import ensemble
 # from sklearn.feature_extraction.text import TfidfVectorizer
@@ -9,75 +8,59 @@ from sklearn import ensemble
 
 train = pd.read_csv("csvData2.csv")
 
-# learning = m.ModelPrediction(train["words"], train["label"], linear_model.LogisticRegression())
-# learning.model_testing_tfidf()
-# learning.train_model()
-#
-#
-# learning2 = m.ModelPrediction(train["hashtags"], train["label"], linear_model.LogisticRegression())
-# learning2.model_testing_tfidf()
-# learning2.train_model()
-#
-#
-# words_value = [x[1] for x in learning.predictions_proba]
-# words_count = train["words_count"]
-# hashtags_value = [x[1] for x in learning2.predictions_proba]
-# hashtags_count = train["hashtags_count"]
-
-
 # linear classifier on Word Level tfidfs
-word_level_tfidf_linear = mc.ModelPrediction(train["words"], train["label"],
-                                             linear_model.LogisticRegression())
+word_level_tfidf_linear = mc.ModelPredictionTFIDF(train["words"], train["label"],
+                                                  linear_model.LogisticRegression())
 print("\n\nword_level_tfidf_linear")
 word_level_tfidf_linear.show_all()
 
-ngram_level_tfidf = mc.ModelPrediction(train["words"], train["label"],
-                                       linear_model.LogisticRegression(),
-                                       ngrams=(2,3))
+ngram_level_tfidf = mc.ModelPredictionTFIDF(train["words"], train["label"],
+                                            linear_model.LogisticRegression(),
+                                            ngrams=(2,3))
 print("\nngram_level_tfidf_linear")
 ngram_level_tfidf.show_all()
 
-char_level_tfidf = mc.ModelPrediction(train["words"], train["label"],
-                                      linear_model.LogisticRegression(),
-                                      analyze='char', ngrams=(2,3))
+char_level_tfidf = mc.ModelPredictionTFIDF(train["words"], train["label"],
+                                           linear_model.LogisticRegression(),
+                                           analyze='char', ngrams=(2,3))
 print("\nchar_level_tfidf_linear")
 char_level_tfidf.show_all()
 
 
 # random forest classifier on tfidfs
-word_level_tfidf_forest = mc.ModelPrediction(train["words"], train["label"],
-                                             ensemble.RandomForestClassifier())
+word_level_tfidf_forest = mc.ModelPredictionTFIDF(train["words"], train["label"],
+                                                  ensemble.RandomForestClassifier())
 print("\n\nword_level_tfidf_forest")
 word_level_tfidf_forest.show_all()
 
-ngram_level_tfidf_forest = mc.ModelPrediction(train["words"], train["label"],
-                                              ensemble.RandomForestClassifier(),
-                                              ngrams=(2,3))
+ngram_level_tfidf_forest = mc.ModelPredictionTFIDF(train["words"], train["label"],
+                                                   ensemble.RandomForestClassifier(),
+                                                   ngrams=(2,3))
 print("\nngram_level_tfidf_forest")
 ngram_level_tfidf_forest.show_all()
 
-char_level_tfidf_forest = mc.ModelPrediction(train["words"], train["label"],
-                                             ensemble.RandomForestClassifier(),
-                                             analyze='char', ngrams=(2,3))
+char_level_tfidf_forest = mc.ModelPredictionTFIDF(train["words"], train["label"],
+                                                  ensemble.RandomForestClassifier(),
+                                                  analyze='char', ngrams=(2,3))
 print("\nchar_level_tfidf_forest")
 char_level_tfidf_forest.show_all()
 
 
 # Naive Bayes classifier on tfidfs
-word_level_tfidf_nb = mc.ModelPrediction(train["words"], train["label"],
-                                         naive_bayes.MultinomialNB())
+word_level_tfidf_nb = mc.ModelPredictionTFIDF(train["words"], train["label"],
+                                              naive_bayes.MultinomialNB())
 print("\n\nword_level_tfidf_nb")
 word_level_tfidf_nb.show_all()
 
-ngram_level_tfidf_nb = mc.ModelPrediction(train["words"], train["label"],
-                                          naive_bayes.MultinomialNB(),
-                                          ngrams=(2,3))
+ngram_level_tfidf_nb = mc.ModelPredictionTFIDF(train["words"], train["label"],
+                                               naive_bayes.MultinomialNB(),
+                                               ngrams=(2,3))
 print("\nngram_level_tfidf_nb")
 ngram_level_tfidf_nb.show_all()
 
-char_level_tfidf_nb = mc.ModelPrediction(train["words"], train["label"],
-                                         naive_bayes.MultinomialNB(),
-                                         analyze='char', ngrams=(2,3))
+char_level_tfidf_nb = mc.ModelPredictionTFIDF(train["words"], train["label"],
+                                              naive_bayes.MultinomialNB(),
+                                              analyze='char', ngrams=(2,3))
 print("\nchar_level_tfidf_nb")
 char_level_tfidf_nb.show_all()
 

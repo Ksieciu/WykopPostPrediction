@@ -7,7 +7,7 @@ import csv
 
 class Scraper():
 
-    url = "https://www.wykop.pl/mikroblog/hot/ostatnie/24/"
+    url = "https://www.wykop.pl/mikroblog/hot/ostatnie/24/strona/"
 
     def __init__(self, file_name, page_start=1, page_end=20):
         self.file_name = file_name
@@ -20,6 +20,7 @@ class Scraper():
     def start(self):
         for i in range(self.page_start, self.page_end + 1):
             page_url = self.url + str(i)
+            print(page_url)
             self.crawl_hot(page_url)
 
 
