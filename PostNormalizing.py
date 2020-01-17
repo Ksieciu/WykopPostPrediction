@@ -3,7 +3,7 @@ from sklearn import linear_model, naive_bayes, tree
 import pandas as pd
 
 
-class PostPrediction():
+class PostNormalizing():
 
     def __init__(self, post_input):
         self.post_input = post_input

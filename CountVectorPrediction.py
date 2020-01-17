@@ -1,11 +1,9 @@
 from sklearn import metrics
-from sklearn import model_selection, preprocessing, tree
+from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-import itertools
+from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
 from sklearn import linear_model, naive_bayes, svm
-from sklearn import ensemble
 
 
 class CountVectorPrediction():
@@ -47,6 +45,7 @@ class CountVectorPrediction():
         self.predictions_proba = self.classifier.predict_proba(self.post_count)
         return self.predictions_proba[0][1]
 
+    # adding results of predictions_proba to dataframe
     def add_all_predictions_to_df(self, tag='words'):
         self.words_prob = []
         self.text = self.count_vect.transform(self.df[tag].astype('U'))
@@ -55,9 +54,10 @@ class CountVectorPrediction():
             self.words_prob.append(self.text_pred_proba[0][1])
         self.df[tag+'_prob'] = self.words_prob
 
+    # returning dataframe - made for returning dataframe with added predictions_proba
     def get_df(self):
         return self.df
 
+    # show accuracy of model
     def show_all(self):
         print("Accuracy:", self.accuracy)
-        print("Exact probability: ", self.predictions_proba)
