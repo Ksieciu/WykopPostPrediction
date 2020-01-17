@@ -4,11 +4,15 @@ from sklearn import linear_model, naive_bayes, ensemble
 from testing_countvect import cv_prediction
 
 # data that will be predicted
-post_input = """Zastanawiasz sie dlaczego jeszcze nie przyszło Ci stypendium? Ministerstwo nie ma środków do wypłacenia na stypendia rekotorskie oraz socjalne dla studenciaków. Jak tam ten budżet bez deficytu!? XD
+post_input = """W @tvp_info ALARM, powtarzam ALARM!!
 
-Bynajmniej na bombelki dały xDDDD
+Wszystkie ręce na pokład!
 
-#studbaza #pis #bekazpisu"""
+#polityka
+
+Ale będzie się działo o 19:30
+
+#4konserwy #neuropa #tvpis"""
 
 # reading data from file
 train = pd.read_csv("csvData4.csv")
@@ -18,5 +22,5 @@ post_df = post.add_to_df()
 
 # getting new df with columns containing predictions_proba on words and hashtags
 cv_prediction(train, post_df, naive_bayes.MultinomialNB())
-# cv_prediction(train, post_df, linear_model.LogisticRegression())
-# cv_prediction(train, post_df, ensemble.RandomForestClassifier())
+cv_prediction(train, post_df, linear_model.LogisticRegression())
+cv_prediction(train, post_df, ensemble.RandomForestClassifier())
