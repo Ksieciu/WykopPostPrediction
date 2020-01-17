@@ -8,6 +8,7 @@ from sklearn import linear_model, naive_bayes
 # data that will be predicted
 post_input = """Pożyczyłam mojemu bratu pieniądze w kwietniu, bo otwierał swoją restaurację. Powiedział, że odda mi do końca sierpnia, ale było coś też przebąkiwane, że do końca roku, no to myślę sobie spoko. Pytam się go pod koniec sierpnia kiedy mi odda, oburzył się i powiedział, że w grudniu. Pytam się w grudniu kiedy odda, to mi wmawia, że umówił się ze mną na początek roku. Zapytałam się go dzisiaj, a on do mnie z pretensjami i krzykiem. Morał jest kurwa taki, nigdy nie pożyczaj swojej rodzinie pieniędzy, bo jeszcze będą mieli do Ciebie wąty, że chcesz je odzyskać... Jeszcze Mama do mnie z pretensjami, że na co mi są tak potrzebne te pieniądze... ughhhhh!!! #rodzina #zalesie"""
 
+
 # reading data from file
 train = pd.read_csv("csvData4.csv")
 # preparing post text for further predictions
@@ -37,5 +38,5 @@ features_df = model.get_df()
 
 final = tfp.TreeFinalPrediction(features_df)
 final.tree_prediction(post_df)
-# final.train_test()
-final.show_probabilities()
+final.train_test()
+# final.show_probabilities()

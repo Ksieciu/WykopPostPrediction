@@ -6,7 +6,7 @@ from sklearn import ensemble
 # from sklearn.model_selection import train_test_split
 
 
-train = pd.read_csv("csvData2.csv")
+train = pd.read_csv("csvData4.csv")
 
 # linear classifier on Word Level tfidfs
 word_level_tfidf_linear = mc.ModelPredictionTFIDF(train["words"], train["label"],
